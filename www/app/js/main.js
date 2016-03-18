@@ -33,6 +33,11 @@ function submitError() {
   submit.className = submit.className.replace(' _error', '');
   submit.className = submit.className + ' _error';
 }
+function clearInputs() {
+  nameInput.value = '';
+  contactInput.value = '';
+  messageImput.value = '';
+}
 overlay.addEventListener('click', function() {
   overlayHide();
   defaultSubmit();
@@ -98,7 +103,5 @@ form.addEventListener('submit', function(e) {
   xhr.open(method, url, true);
   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
   xhr.send("name="+encodeURIComponent(data.name)+"&phone="+encodeURIComponent(data.phone)+'&message='+encodeURIComponent(data.message));
-  nameInput.value = '';
-  contactInput.value = '';
-  messageImput.value = '';
+  clearInputs();
 });
