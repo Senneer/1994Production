@@ -245,6 +245,11 @@ body {
     font: 700 25px/42px $accidental-ff;
     text-align: center;
   }
+
+  &__error {
+    @extend .popup__message;
+    display: none;
+  }
 }
 
 .form {

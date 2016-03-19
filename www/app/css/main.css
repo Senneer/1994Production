@@ -232,7 +232,8 @@ body {
           transform: translate(2%, 10%);
   transition: all .1s ease-in-out;
 }
-.popup__message {
+.popup__message,
+.popup__error {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -242,6 +243,9 @@ body {
           transform: translate(-50%, -50%);
   font: 700 25px/42px 'Open Sans', Arial, sans-serif;
   text-align: center;
+}
+.popup__error {
+  display: none;
 }
 
 .form {

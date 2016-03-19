@@ -1,18 +1,16 @@
-'use strict';
-
-var overlay = document.getElementsByClassName('overlay')[0];
-var popup = document.getElementsByClassName('popup')[0];
-var closeBtn = document.getElementsByClassName('popup__close-button')[0];
-var orderBtn = document.getElementsByClassName('order-button')[0];
-var submit = document.getElementsByClassName('form__submit')[0];
-var successmsg = document.getElementsByClassName('_successmsg')[0];
-var popupSuccess = document.getElementsByClassName('popup__message')[0];
-var popupError = document.getElementsByClassName('popup__error')[0];
-var form = document.getElementById('sendMailForm');
-var nameInput = document.getElementById('name');
-var contactInput = document.getElementById('phone');
-var messageImput = document.getElementById('message');
-var is_open = ' _is-open';
+const overlay = document.getElementsByClassName('overlay')[0];
+const popup = document.getElementsByClassName('popup')[0];
+const closeBtn = document.getElementsByClassName('popup__close-button')[0];
+const orderBtn = document.getElementsByClassName('order-button')[0];
+const submit = document.getElementsByClassName('form__submit')[0];
+const successmsg = document.getElementsByClassName('_successmsg')[0];
+const popupSuccess = document.getElementsByClassName('popup__message')[0];
+const popupError = document.getElementsByClassName('popup__error')[0];
+const form = document.getElementById('sendMailForm');
+const nameInput = document.getElementById('name');
+const contactInput = document.getElementById('phone');
+const messageImput = document.getElementById('message');
+const is_open = ' _is-open';
 function overlayShow() {
   overlay.className = overlay.className.replace(is_open, '');
   overlay.className = overlay.className + is_open;
@@ -53,29 +51,27 @@ function clearInputs() {
   contactInput.value = '';
   messageImput.value = '';
 }
-overlay.addEventListener('click', function () {
+overlay.addEventListener('click', function() {
   overlayHide();
   defaultSubmit();
 });
-closeBtn.addEventListener('click', function () {
+closeBtn.addEventListener('click', function() {
   overlayHide();
   defaultSubmit();
 });
 orderBtn.addEventListener('click', overlayShow);
 orderBtn.addEventListener('click', successmsgHide);
-orderBtn.addEventListener('click', function () {
+orderBtn.addEventListener('click', function() {
   popupShow();
   errorHide();
 });
-orderBtn.addEventListener('click', function () {
+orderBtn.addEventListener('click', () => {
   popupShow();
   errorHide();
 });
-popup.addEventListener('click', function (e) {
-  return e.stopPropagation();
-});
+popup.addEventListener('click', e => e.stopPropagation());
 
-form.addEventListener('submit', function (e) {
+form.addEventListener('submit', function(e) {
   e.preventDefault();
   var url = form.getAttribute('action');
   var method = form.getAttribute('method');
@@ -99,13 +95,15 @@ form.addEventListener('submit', function (e) {
   contactInput.addEventListener('click', defaultSubmit);
   messageImput.addEventListener('click', defaultSubmit);
 
-  if (nameInputValue === '' && contactInputValue === '' && messageImputValue === '') {
+  if (nameInputValue === '' && 
+      contactInputValue === '' && 
+      messageImputValue === '') {
     submit.value = 'Заполните хотя бы одно поле';
     submitError();
     return false;
   }
   var xhr = new XMLHttpRequest();
-  xhr.onreadystatechange = function () {
+  xhr.onreadystatechange = function() {
     if (xhr.readyState === XMLHttpRequest.DONE) {
       if (xhr.status === 200) {
         popupHide();
@@ -120,7 +118,7 @@ form.addEventListener('submit', function (e) {
     }
   };
   xhr.open(method, url, true);
-  xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-  xhr.send('name=' + encodeURIComponent(data.name) + '&phone=' + encodeURIComponent(data.phone) + '&message=' + encodeURIComponent(data.message));
+  xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+  xhr.send(`name=${encodeURIComponent(data.name)}&phone=${encodeURIComponent(data.phone)}&message=${encodeURIComponent(data.message)}`);
   clearInputs();
 });

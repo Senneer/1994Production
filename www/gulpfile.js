@@ -5,15 +5,26 @@ var gulp = require('gulp'),
   autoprefixer = require('autoprefixer'),
   connect = require('gulp-connect'),
   csscomb = require('gulp-csscomb'),
-  sass = require('gulp-sass');
+  sass = require('gulp-sass'),
+  babel = require('gulp-babel');
 
 //connect
-console.log(__dirname);
 gulp.task('connect', function() {
   connect.server({
     root: './app/',
-    livereload: true
+    livereload: true,
+    port: 8888
   });
+});
+
+//js
+gulp.task('js', function() {
+  return gulp.src('./js/*.js')
+    .pipe(babel({
+      presets: ['es2015']
+    }))
+    .pipe(gulp.dest('./app/js/'))
+    .pipe(connect.reload());
 });
 
 //css
@@ -35,9 +46,10 @@ gulp.task('html', function(){
 
 //watch
 gulp.task('watch', function(){
-  gulp.watch('./scss/*.scss', ['css'])
-  gulp.watch('./app/index.html', ['html'])
+  gulp.watch('./js/*.js', ['js']);
+  gulp.watch('./scss/*.scss', ['css']);
+  gulp.watch('./app/index.html', ['html']);
 });
 
 //default
-gulp.task('default', ['connect', 'html', 'css', 'watch']);
+gulp.task('default', ['connect', 'js', 'html', 'css', 'watch']);
