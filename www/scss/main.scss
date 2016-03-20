@@ -7,6 +7,30 @@ body {
   background: linear-gradient(to bottom, #f6d545, #cfa32c);
 }
 
+.main-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.first,
+.second {
+  display: none;
+  position: absolute;
+  z-index: -1;
+  background: url(../images/fast.png) no-repeat 50% 50%;
+  background-size: cover;
+  width: 100%;
+  height: 2164px;
+  transform: translate3d(0,0,0);
+}
+
+.second {
+  background: url(../images/slow.png) no-repeat 50% 50%;
+  height: 2328px;
+  opacity: .2;
+  z-index: -2;
+}
+
 .svg-sprite {
   display: none;
 }

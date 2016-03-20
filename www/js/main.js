@@ -122,3 +122,34 @@ form.addEventListener('submit', function(e) {
   xhr.send(`name=${encodeURIComponent(data.name)}&phone=${encodeURIComponent(data.phone)}&message=${encodeURIComponent(data.message)}`);
   clearInputs();
 });
+
+var first = document.getElementsByClassName('first')[0];
+var second = document.getElementsByClassName('second')[0];
+
+var fast = 0;
+var slow = 0;
+
+var clientHeight = document.body.scrollHeight - screen.availHeight;
+first.style.display = 'block';
+second.style.display = 'block';
+
+function parallax() {
+    fast = document.body.scrollTop/3;
+    slow = document.body.scrollTop/2;
+    if (document.body.scrollTop >= clientHeight) {
+      return false;
+    }
+
+    first.style.transform = "translate3d(0, " + fast + "px, 0)";
+    second.style.transform = "translate3d(0, " + slow + "px, 0)";
+}
+
+var requestAnimationFrame = window.requestAnimationFrame || 
+  window.mozRequestAnimationFrame ||
+  window.webkitRequestAnimationFrame || 
+  window.msRequestAnimationFrame;
+
+
+window.addEventListener('scroll', function(e) {
+    window.requestAnimationFrame(parallax);
+});
