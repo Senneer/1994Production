@@ -125,6 +125,7 @@ clearInputs();
 
 const first = document.getElementsByClassName('first')[0];
 const second = document.getElementsByClassName('second')[0];
+const logo = document.getElementsByClassName('header__logoImg')[0];
 
 let fast = 0;
 let slow = 0;
@@ -132,6 +133,7 @@ let slow = 0;
 const clientHeight = document.body.scrollHeight - screen.availHeight;
 first.style.display = 'block';
 second.style.display = 'block';
+logo.style.display = 'block';
 
 function parallax() {
   fast = document.body.scrollTop/3;
@@ -142,6 +144,7 @@ function parallax() {
 
   first.style.transform = "translate3d(0, " + fast + "px, 0)";
   second.style.transform = "translate3d(0, " + slow + "px, 0)";
+  logo.style.transform = "translate3d(0, " + slow + "px, 0)";
 }
 
 const requestAnimationFrame = window.requestAnimationFrame || 
