@@ -148,6 +148,12 @@ function parallax() {
 
 var requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
 
-window.addEventListener('scroll', function (e) {
+var parallaxAnimation = function parallaxAnimation(e) {
   window.requestAnimationFrame(parallax);
-});
+};
+
+window.addEventListener('scroll', parallaxAnimation);
+
+if (window.matchMedia('(max-width: 1000px)').matches) {
+  window.removeEventListener('scroll', parallaxAnimation);
+};

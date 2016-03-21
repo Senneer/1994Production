@@ -96,31 +96,31 @@ form.addEventListener('submit', function(e) {
   messageImput.addEventListener('click', defaultSubmit);
 
   if (nameInputValue === '' && 
-      contactInputValue === '' && 
-      messageImputValue === '') {
+    contactInputValue === '' && 
+    messageImputValue === '') {
     submit.value = 'Заполните хотя бы одно поле';
-    submitError();
-    return false;
+  submitError();
+  return false;
+}
+var xhr = new XMLHttpRequest();
+xhr.onreadystatechange = function() {
+  if (xhr.readyState === XMLHttpRequest.DONE) {
+    if (xhr.status === 200) {
+      popupHide();
+      successmsgShow();
+      setTimeout(overlayHide, 1000);
+    } else {
+      popupHide();
+      successmsgShow();
+      errorShow();
+      setTimeout(overlayHide, 2000);
+    };
   }
-  var xhr = new XMLHttpRequest();
-  xhr.onreadystatechange = function() {
-    if (xhr.readyState === XMLHttpRequest.DONE) {
-      if (xhr.status === 200) {
-        popupHide();
-        successmsgShow();
-        setTimeout(overlayHide, 1000);
-      } else {
-        popupHide();
-        successmsgShow();
-        errorShow();
-        setTimeout(overlayHide, 2000);
-      };
-    }
-  };
-  xhr.open(method, url, true);
-  xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
-  xhr.send(`name=${encodeURIComponent(data.name)}&phone=${encodeURIComponent(data.phone)}&message=${encodeURIComponent(data.message)}`);
-  clearInputs();
+};
+xhr.open(method, url, true);
+xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+xhr.send(`name=${encodeURIComponent(data.name)}&phone=${encodeURIComponent(data.phone)}&message=${encodeURIComponent(data.message)}`);
+clearInputs();
 });
 
 var first = document.getElementsByClassName('first')[0];
@@ -134,22 +134,27 @@ first.style.display = 'block';
 second.style.display = 'block';
 
 function parallax() {
-    fast = document.body.scrollTop/3;
-    slow = document.body.scrollTop/2;
-    if (document.body.scrollTop >= clientHeight) {
-      return false;
-    }
+  fast = document.body.scrollTop/3;
+  slow = document.body.scrollTop/2;
+  if (document.body.scrollTop >= clientHeight) {
+    return false;
+  }
 
-    first.style.transform = "translate3d(0, " + fast + "px, 0)";
-    second.style.transform = "translate3d(0, " + slow + "px, 0)";
+  first.style.transform = "translate3d(0, " + fast + "px, 0)";
+  second.style.transform = "translate3d(0, " + slow + "px, 0)";
 }
 
 var requestAnimationFrame = window.requestAnimationFrame || 
-  window.mozRequestAnimationFrame ||
-  window.webkitRequestAnimationFrame || 
-  window.msRequestAnimationFrame;
+window.mozRequestAnimationFrame ||
+window.webkitRequestAnimationFrame || 
+window.msRequestAnimationFrame;
 
+var parallaxAnimation = function(e) {
+  window.requestAnimationFrame(parallax);
+};
 
-window.addEventListener('scroll', function(e) {
-    window.requestAnimationFrame(parallax);
-});
+window.addEventListener('scroll', parallaxAnimation);
+
+if (window.matchMedia('(max-width: 1000px)').matches) {
+  window.removeEventListener('scroll', parallaxAnimation);
+};
