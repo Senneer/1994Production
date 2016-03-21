@@ -123,13 +123,13 @@ xhr.send(`name=${encodeURIComponent(data.name)}&phone=${encodeURIComponent(data.
 clearInputs();
 });
 
-var first = document.getElementsByClassName('first')[0];
-var second = document.getElementsByClassName('second')[0];
+const first = document.getElementsByClassName('first')[0];
+const second = document.getElementsByClassName('second')[0];
 
-var fast = 0;
-var slow = 0;
+let fast = 0;
+let slow = 0;
 
-var clientHeight = document.body.scrollHeight - screen.availHeight;
+const clientHeight = document.body.scrollHeight - screen.availHeight;
 first.style.display = 'block';
 second.style.display = 'block';
 
@@ -144,17 +144,23 @@ function parallax() {
   second.style.transform = "translate3d(0, " + slow + "px, 0)";
 }
 
-var requestAnimationFrame = window.requestAnimationFrame || 
+const requestAnimationFrame = window.requestAnimationFrame || 
 window.mozRequestAnimationFrame ||
 window.webkitRequestAnimationFrame || 
 window.msRequestAnimationFrame;
 
-var parallaxAnimation = function(e) {
+const parallaxAnimation = function() {
   window.requestAnimationFrame(parallax);
 };
 
-window.addEventListener('scroll', parallaxAnimation);
+const mql = window.matchMedia('(max-width: 1000px)');
+mql.addListener(handleOrientationChange);
+handleOrientationChange(mql);
 
-if (window.matchMedia('(max-width: 1000px)').matches) {
-  window.removeEventListener('scroll', parallaxAnimation);
-};
+function handleOrientationChange(mql) {
+  if (mql.matches) {
+    window.removeEventListener('scroll', parallaxAnimation, false);
+  } else {
+    window.addEventListener('scroll', parallaxAnimation, false);
+  }
+}

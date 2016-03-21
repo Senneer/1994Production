@@ -148,12 +148,18 @@ function parallax() {
 
 var requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
 
-var parallaxAnimation = function parallaxAnimation(e) {
+var parallaxAnimation = function parallaxAnimation() {
   window.requestAnimationFrame(parallax);
 };
 
-window.addEventListener('scroll', parallaxAnimation);
+var mql = window.matchMedia('(max-width: 1000px)');
+mql.addListener(handleOrientationChange);
+handleOrientationChange(mql);
 
-if (window.matchMedia('(max-width: 1000px)').matches) {
-  window.removeEventListener('scroll', parallaxAnimation);
-};
+function handleOrientationChange(mql) {
+  if (mql.matches) {
+    window.removeEventListener('scroll', parallaxAnimation, false);
+  } else {
+    window.addEventListener('scroll', parallaxAnimation, false);
+  }
+}
