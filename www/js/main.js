@@ -144,7 +144,7 @@ function parallax() {
 
   first.style.transform = "translate3d(0, " + fast + "px, 0)";
   second.style.transform = "translate3d(0, " + slow + "px, 0)";
-  logo.style.transform = "translate3d(0, " + slow + "px, 0)";
+  logo.style.transform = "translate3d(0, " + (-slow) + "px, 0)";
 }
 
 const requestAnimationFrame = window.requestAnimationFrame || 
