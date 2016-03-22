@@ -162,6 +162,9 @@ handleOrientationChange(mql);
 function handleOrientationChange(mql) {
   if (mql.matches) {
     window.removeEventListener('scroll', parallaxAnimation, false);
+    first.style.transform = "translate3d(0, 0, 0)";
+    second.style.transform = "translate3d(0, 0, 0)";
+    logo.style.transform = "translate3d(0, 0, 0)";
   } else {
     window.addEventListener('scroll', parallaxAnimation, false);
   }
