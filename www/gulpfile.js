@@ -6,6 +6,7 @@ var gulp = require('gulp'),
   connect = require('gulp-connect'),
   csscomb = require('gulp-csscomb'),
   sass = require('gulp-sass'),
+  flexbugs = require('postcss-flexbugs-fixes'),
   babel = require('gulp-babel');
 
 //connect
@@ -29,7 +30,7 @@ gulp.task('js', function() {
 
 //css
 gulp.task('css', function() {
-  var processors = [autoprefixer({browsers: ['last 3 version', 'ie 10', 'ie 11']})];
+  var processors = [autoprefixer({browsers: ['last 3 version', 'ie 10', 'ie 11']}), flexbugs];
   return gulp.src('./scss/main.scss')
   .pipe(sass().on('error', sass.logError))
   .pipe(postcss(processors))

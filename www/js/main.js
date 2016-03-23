@@ -135,10 +135,12 @@ first.style.display = 'block';
 second.style.display = 'block';
 logo.style.display = 'block';
 
+
 function parallax() {
-  fast = document.body.scrollTop/3;
-  slow = document.body.scrollTop/2;
-  if (document.body.scrollTop >= clientHeight) {
+  let bodyScrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+  fast = bodyScrollTop/3;
+  slow = bodyScrollTop/2;
+  if (bodyScrollTop >= clientHeight) {
     return false;
   }
 
