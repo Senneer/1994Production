@@ -123,8 +123,8 @@ xhr.send(`name=${encodeURIComponent(data.name)}&phone=${encodeURIComponent(data.
 clearInputs();
 });
 
-const first = document.getElementsByClassName('first')[0];
-const second = document.getElementsByClassName('second')[0];
+const first = document.getElementsByClassName('fastParallax')[0];
+const second = document.getElementsByClassName('slowParallax')[0];
 const logo = document.getElementsByClassName('header__logoImg')[0];
 
 let fast = 0;

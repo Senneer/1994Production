@@ -125,8 +125,8 @@ form.addEventListener('submit', function (e) {
   clearInputs();
 });
 
-var first = document.getElementsByClassName('first')[0];
-var second = document.getElementsByClassName('second')[0];
+var first = document.getElementsByClassName('fastParallax')[0];
+var second = document.getElementsByClassName('slowParallax')[0];
 var logo = document.getElementsByClassName('header__logoImg')[0];
 
 var fast = 0;
